@@ -28,6 +28,9 @@ RUN NODE_VERSION=$(curl -SL "https://nodejs.org/dist/index.tab" \
   && tar -xzf "node-${NODE_VERSION}-linux-x64.tar.gz" -C /usr/local --strip-components=1 \
   && rm "node-${NODE_VERSION}-linux-x64.tar.gz" SHASUMS256.txt.asc
 
+RUN apt-get update -y \
+    && apt-get install -y -qq libmysqlclient-dev mysql-client \
+    && apt-get clean
 # throw errors if Gemfile has been modified since Gemfile.lock
 RUN bundle config --global frozen 1
 

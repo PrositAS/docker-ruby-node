@@ -19,7 +19,7 @@ ENV NPM_CONFIG_LOGLEVEL info
 ENV NODE_MAJOR_VERSION 4
 
 RUN apt-get update -y \
-  && apt-get install --no-install-recommends -y curl \
+  && apt-get install --no-install-recommends -y curl libmysqlclient-dev mysql-client \
   && NODE_VERSION=$(curl -SL "https://nodejs.org/dist/index.tab" \
                  | grep "v${NODE_MAJOR_VERSION}" \
                  | head -n 1 | awk '{ print $1 }') \
@@ -32,3 +32,6 @@ RUN apt-get update -y \
   && apt-get remove -y curl \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
+
+RUN gem install bundler --no-ri --no-rdoc
+

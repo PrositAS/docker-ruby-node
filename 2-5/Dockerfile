@@ -27,3 +27,7 @@ RUN NODE_VERSION=$(curl -SL "https://nodejs.org/dist/index.tab" \
   && grep " node-${NODE_VERSION}-linux-x64.tar.gz\$" SHASUMS256.txt.asc | sha256sum -c - \
   && tar -xzf "node-${NODE_VERSION}-linux-x64.tar.gz" -C /usr/local --strip-components=1 \
   && rm "node-${NODE_VERSION}-linux-x64.tar.gz" SHASUMS256.txt.asc
+
+RUN apt-get update -y \
+    && apt-get install -y -qq libmysqlclient-dev mysql-client \
+    && apt-get clean
